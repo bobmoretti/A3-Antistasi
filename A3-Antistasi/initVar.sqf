@@ -21,7 +21,7 @@ recruitCooldown = 0;
 savingClient = false;
 incomeRep = false;
 //distanciaMiss = 2500;
-minMags = 20;
+minMags = 30;
 
 minPacks = 20;
 minItems = 20;
