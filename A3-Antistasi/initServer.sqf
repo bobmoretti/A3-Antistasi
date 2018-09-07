@@ -131,10 +131,31 @@ else
     };
 diag_log "Antistasi MP Server. Players are in";
 
+
+// make sure all ammo types for all unlocked weapons are available
+{
+    private _weapon = _x;
+    private _magazines = getArray (configFile / "CfgWeapons" / _weapon / "magazines");
+    {
+        _magazine = _x;
+        if (!isNil "_magazine") then
+        {
+            if (not(_magazine in unlockedMagazines)) then
+            {
+                unlockedMagazines pushBack _magazine;
+            };
+        };
+    } forEach _magazines;
+} forEach (unlockedweapons - mlaunchers);
+
 {
 private _index = _x call jn_fnc_arsenal_itemType;
 [_index,_x,-1] call jn_fnc_arsenal_addItem;
 }foreach (unlockeditems + unlockedweapons + unlockedMagazines + unlockedBackpacks);
+
+
+
+
 
 
 diag_log "Antistasi MP Server. Arsenal config finished";
